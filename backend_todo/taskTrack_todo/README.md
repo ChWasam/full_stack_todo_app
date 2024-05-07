@@ -22,7 +22,7 @@ Need to make only one model
 
 10. now import DATABASE_URL from setting jo hama engine create karna me madad da ga
 
-11. as we nned to detup our connection with database - fastapi -> ka andar sqlmodel-> ka andar engine - yeh engine hmara connection karwai ga db (postgres) ka sath - wo engine ai ga sqlmodel sa
+11. as we nned to setup our connection with database - fastapi -> ka andar sqlmodel-> ka andar engine - yeh engine hmara connection karwai ga db (postgres) ka sath - wo engine ai ga sqlmodel sa
     -from sqlmodel import create_engine
 
 12 Now create engine 
