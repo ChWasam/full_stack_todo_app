@@ -32,6 +32,7 @@ class Todo (SQLModel, table = True):
 
  
 connection_string:str = str(settings.DATABASE_URL).replace("postgresql","postgresql+psycopg")
+#  ku kah me is postgrs ko psycopg ka sath use kar raha ho 
 engine = create_engine(connection_string)
 
 
