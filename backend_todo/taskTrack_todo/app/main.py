@@ -3,6 +3,27 @@ from sqlmodel import SQLModel,Field, create_engine, Session, select
 from app import settings
 from typing import Annotated
 from contextlib import asynccontextmanager
+
+# *******************************************************************
+# Quick summary
+
+# Step-1: Create Database on Neon
+# Step-2: Create .env file for environment variables
+# Step-3: Create setting.py file for encrypting DatabaseURL
+# Step-4: Create a Model
+# Step-5: Create Engine
+# Step-6: Create function for table creation
+# Step-7: Create function for session management
+# Step-8: Create contex manager for app lifespan
+# Step-9: Create all endpoints of todo app
+
+# *******************************************************************
+
+
+
+
+
+
 #  Custom type create karna ka lia Annotated ka use karta han 
 
 #  Lets make a data model yeh table create nahi kara ga 
