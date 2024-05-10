@@ -19,11 +19,6 @@ from contextlib import asynccontextmanager
 
 # *******************************************************************
 
-
-
-
-
-
 #  Custom type create karna ka lia Annotated ka use karta han 
 
 #  Lets make a data model yeh table create nahi kara ga 
