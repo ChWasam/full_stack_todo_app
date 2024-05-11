@@ -5,9 +5,9 @@
 
 Steps
 
-1. (Creating Model) We need to create model. Hamara model create ho ga sql model sa jo ORM ha - poetry add sqlmodel - Is sa phir ham khuch cheezain import karain ga
+1. (Creating Model) We need to create model. Hamara model create ho ga sqlmodel sa jo ORM ha - poetry add sqlmodel - Is sa phir ham khuch cheezain import karain ga
 2. pydantic => Data validation and data parsing
-3. sql alchemy => data base me tables create kara ga
+3. sql alchemy => database me tables create kara ga
 4. sql model => pydantic + sqlalchemy
 5. we need to create model of 2 types 1. Data Model (data ko validate karna ka lia ) 2. Table model (data base me jo table create karna ha aus ka lia )
 
@@ -46,7 +46,9 @@ Need to make only one model
 
 18. Fastapi
 
-19. ab har method(get, del, post,put) ka lia session ka sara kam karna para ga - generator function - dependency injection
+19. ab har method(get, del, post,put) ka lia session ka sara kam karna para ga
+ - generator function 
+ - dependency injection
 
 20. Jab hamari app start hoti ha to wo khuch cheezo pa depend kar rahi hoti ha
 
