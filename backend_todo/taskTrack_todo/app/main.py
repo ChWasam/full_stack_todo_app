@@ -31,8 +31,8 @@ from contextlib import asynccontextmanager
 #  Ab id ko bnana ha primary key 
 #  aur wo unique bhi honi chahia
 #  Agar user  sa  id lai to wo to asi id da sakta ha jo pehla nhi kisi na de ho 
-#  Ham yeh chahta ham db yeh khud create kara  
-# is ka lia ham   pehla id : int|None dana para ga . None ka matlab absence of data 
+#  Ham yeh chahta han db yeh khud create kara  
+# is ka lia ham pehla id : int|None dana para ge. None ka matlab absence of data 
 #  jab todo ko get kar kah  la kar ai ga aus case me id ho ga 
 # Ku kah aus case me database na assign kia ho ga  
 #  jab todo ko create kara ga to aus waqt none ho ga ku kah ham id to nahi da raha han
@@ -44,9 +44,8 @@ class Todo (SQLModel, table=True):
     content: str = Field(index=True, min_length=3, max_length=54)
     # Index : Is column ko data base me index kar da ge 
     # Faida yeh hota ha kha jab ham search karain ga apna task ko  
-    #  to database ko sara table scan nahi karna para ga 
-
-    #  data validation ka lia bhi use hota ha is lia min_length=3
+    # to database ko sara table scan nahi karna para ga 
+    # data validation ka lia bhi use hota ha is lia min_length=3
     is_completed: bool = Field(default=False)
     #  Matlab jab bhi create karain ga task to default value False kar dya ha 
 
