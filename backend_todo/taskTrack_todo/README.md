@@ -7,11 +7,11 @@ Steps
 
 1. (Creating Model) We need to create model. Hamara model create ho ga sqlmodel sa jo ORM ha - poetry add sqlmodel - Is sa phir ham khuch cheezain import karain ga
 2. pydantic => Data validation and data parsing
-3. sql alchemy => database me tables create kara ga
-4. sql model => pydantic + sqlalchemy
-5. we need to create model of 2 types 1. Data Model (data ko validate karna ka lia ) 2. Table model (data base me jo table create karna ha aus ka lia )
+3. sqlalchemy => database me tables create kara ga
+4. sqlmodel => pydantic + sqlalchemy
+5. we need to create model of 2 types 1. Data Model (data ko validate karna ka lia ) 2. Table model (database me jo table create karna ha aus ka lia )
 
-6. Jab alchemy use hota tha to aus case me 1. Data Model alag banta tha 2. Table model alag banta tha
+6. Jab sqlalchemy use hota tha to aus case me 1. Data Model alag banta tha 2. Table model alag banta tha
 
 7.SQLModel
 Need to make only one model

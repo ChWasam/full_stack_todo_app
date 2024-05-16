@@ -42,7 +42,7 @@ class Todo (SQLModel, table=True):
     id : int|None = Field(default=None, primary_key=True)
     # Yahan id optional ha 
     content: str = Field(index=True, min_length=3, max_length=54)
-    # Index : Is column ko data base me index kar da ge 
+    # Index : Is column ko database me index kar da ge 
     # Faida yeh hota ha kha jab ham search karain ga apna task ko  
     # to database ko sara table scan nahi karna para ga 
     # data validation ka lia bhi use hota ha is lia min_length=3
@@ -73,7 +73,7 @@ engine = create_engine(connection_string, connect_args={"sslmode":"require"},poo
 
 #  pool_recycle : matlab kah 300 sec yani 5 min bad connection recycle ho jai 
 
-# echo=True : matlab engine jitna bhi kam kar raha ho ga yeh mujha har step ka show kar dai ga kah yeh  yeh kam kia ha . Step wise sari cheezain terminal pa batai ga kah kya kya step perform hua han
+# echo=True : matlab engine jitna bhi kam kar raha ho ga yeh mujha har step ka show kar dai ga kah yeh kam kia ha . Step wise sari cheezain terminal pa batai ga kah kya kya step perform hua han
 
 # *******************************************************************
 
@@ -110,7 +110,7 @@ def create_tables():
 
 #  session overwrite sa bachna ka lia kahta ha kah jitna bhi kam mera sa karwana han wo mujha da do me ak hi bar kar do ga
 
-# yeh in memory ariable me store kar lata h adata 
+# yeh in memory variable me store kar lata ha data 
 # abhi direct commit nahi kara ga 
 #  Like in git pehla ap add kar lata han commit bad me karta han
 
@@ -121,8 +121,7 @@ def create_tables():
 # session.commit()
 
 # session.refresh(todo1)
-
-#  yeh hama database sa value la kar da ga jahan id  bhi assign ho chuki ha 
+# yeh hama database sa value la kar da ga jahan id  bhi assign ho chuki ha 
 
 #  Commit sa todo table me create ho jai ga   
 # print(f"After Commit {todo1}")
@@ -139,7 +138,7 @@ def create_tables():
 #  Behtar yeh ha kah ham apna ak function bna lain 
 
 #  We will use generator function here 
-
+#  Dependency Injection 
 def get_session():
     with Session(engine) as session:
         yield session 
@@ -151,7 +150,7 @@ def get_session():
 #  necha jo bhi function ho ga isa as a context create kar da ga 
 # ab is ko async nahi bhi bnaya yeh async hi ho ga 
 #  is me asi cheezain karain ga kah jab app start hoti ha to pehla yeh kam hona chahia 
-# e.g  1) tables create hona chahia  2)
+# e.g  1) tables create hona chahia etc
 
 #  app ke start pa sab sa pehla yeh kam hona chahia 
 @asynccontextmanager
@@ -161,15 +160,11 @@ async def lifespan(app:FastAPI):
      create_tables()
      print("Tables Created")
      yield
-# yield pa  a kah run jai ga phir wahan pa baqi function hamari app ka cuncurrently perform ho ga 
-
-
-     
-
-
-
+# yield pa  a kah ruk jai ga phir wahan pa baqi function hamari app ka cuncurrently perform ho ga 
 
 # *******************************************************************
+
+
 # Jab hamari app start hoti ha to wo khuch cheezo pa depend kar rahi hoti ha
 # - Hama is ka lia ak context bnana para ga 
 #  app ko title aur version bhi da sakta han 
@@ -193,14 +188,14 @@ async def root():
 
 @app.post("/todos", response_model=Todo)
 #  user sa ak todo ai ge aus ke type ho ge todo
-#  Ab jo task database sa ai ge ham na isa create karna ha for that we need a session  
+#  Ab jo task user sa ai ge ham na isa create karna ha for that we need a session  
 # ab yeh session get_session ka function me rakh lia 
 #  Yahan ham dakh sakta han kah todo ke class as a data model bhi use ho rahi ha 
 
 #  response_model=Todo : Is ka yeh matlab ha kah mujha jo response/todo return ho ge wo validate ho ge is datamodel sa 
 # Agar ham user ka bnata to alag sa aus ka bhi model bna lata 
 #  agar ham chahta han kah ham asa data model banai jis sa table na bana to ham  table=True nahi likhain ga 
-async def create_todo(todo:Todo , session:Annotated[Session,Depends(get_session )]):
+async def create_todo(todo:Todo , session:Annotated[Session,Depends(get_session)]):
     session.add(todo)
     session.commit()
     session.refresh(todo)
@@ -214,12 +209,15 @@ async def get_all_todos(session:Annotated[Session,Depends(get_session)]):
     statement = select(Todo)
     # Todos ka table select karain 
     todos =  session.exec(statement).all()
+
+    # todos = session.exec(select(Todo)).all()
+
     #  return ka datatype btana para ga datavalidation ka lia 
     #  ak sa zyada todos ai ge to wo list ke form me ai ge 
     if todos:
         return todos
     else:
-        raise HTTPException(status_code=404 , detail=f"No record found")
+        raise HTTPException(status_code=404 , detail=f"No task remaining")
 
 @app.get("/todos/{id}", response_model=Todo)
 async def get_single_todo(id:int, session:Annotated[Session,Depends(get_session)]):
@@ -232,7 +230,7 @@ async def get_single_todo(id:int, session:Annotated[Session,Depends(get_session)
     else:
         raise HTTPException(status_code=404 , detail=f"No todo found with id: {id}")
 
-@app.put("/todos/{id}")
+@app.put("/todos/{id}", response_model= Todo)
 #  put me complete data provide karna parta ha 
 # Patch me jo data change karna chahta han sirf wohi provide karna chahta han  
 async def update_todo(id:int, todo:Todo, session:Annotated[Session,Depends(get_session)]):
@@ -248,10 +246,10 @@ async def update_todo(id:int, todo:Todo, session:Annotated[Session,Depends(get_s
         raise HTTPException (status_code=404 , detail=f"No todo found with id: {id}")
 
 
-@app.delete("/todos/{id}")
+@app.delete("/todos/{id}", response_model=dict)
 async def delete_todo(id:int, session:Annotated[Session,Depends(get_session)]):
     todo = session.exec(select(Todo).where(Todo.id == id)).first()
-    # todo = session. get (Todo, id)
+    # todo = session.get(Todo, id)
     if todo:
         session.delete(todo)
         session.commit()
