@@ -180,7 +180,7 @@ app : FastAPI = FastAPI(lifespan=lifespan, title="TaskTrack todo app", version="
 
 #  ab har method(get, del, post,put) ka lia session ka sara kam karna para ga 
 #  Har transaction ka lia hama session required ha  
-#  session ko  open karain ga aur close karain ga jab transacion complete ho jai ge 
+#  session ko  open karain ga aur close karain ga jab transaction complete ho jai ge 
 #  Behtar yeh ha kah ham apna ak function bna lain 
 @app.get("/")
 async def root():
