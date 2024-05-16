@@ -53,7 +53,7 @@ class Todo (SQLModel, table=True):
 #  Engine is one for whole application 
 
 connection_string: str =str(settings.DATABASE_URL).replace("postgresql","postgresql+psycopg")
-#  ku kah me is postgrs ko psycopg ka sath use kar raha ho is lia replace kia ha 
+#  ku kah me is postgres ko psycopg ka sath use kar raha ho is lia replace kia ha 
 #  kah mera communication is sa ho ge postgresql+psycopg 
 
 #  Ab ham chahta han jo bhi hmari communication ho database ka sath wo encrypt ho kah jai 
